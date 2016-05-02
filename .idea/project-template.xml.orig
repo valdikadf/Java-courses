@@ -1,8 +1,0 @@
-<<<<<<< HEAD
-<template>
-  <input-field default="com.company">IJ_BASE_PACKAGE</input-field>
-=======
-<template>
-  <input-field default="com.company">IJ_BASE_PACKAGE</input-field>
->>>>>>> 3e2143b1c958943c13975ea4c600bb1163e242c9
-</template>
