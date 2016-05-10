@@ -1,6 +1,7 @@
 package test.pack;
 
 import geek.courses.java.MyMath;
+import quadratic.Format;
 import ua.in.sceinces.Program;
 import java.io.IOException;
 import java.io.SyncFailedException;
@@ -13,9 +14,19 @@ import java.util.Arrays;
 public class Test {
 
     public static void main(String[] args) throws IOException {
-        double a = readFraseForFormul("A = 1");
-        readAndParse(a,-4,4);
-        
+        //double a = readFraseForFormul("A = 1");
+        //readAndParse(a,-4,4);
+        Format coefficients = new Format();
+        String[] nameCoef = new String[]{"a","b","c"};
+        coefficients.setNameArg(nameCoef);
+        for(String s:nameCoef){System.out.println(s);}
+        coefficients.findValue("a=6131 b=0.3  c= -5");
+        for(String names:coefficients.getInsertNames()){
+            System.out.print(names + " ");
+        }
+        for(Double values:coefficients.getInsertValues()){
+            System.out.print(values + " ");
+        }
     }
 
     private static double readFraseForFormul(String s) {
