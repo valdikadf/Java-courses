@@ -1,59 +1,83 @@
-"AWT-EventQueue-0 IDEA 15.0.4#IC-143.2287.1 IDEA, eap:false, os:Windows 7 6.1, java-version:Oracle Corporation 1.8.0_51-b16" prio=0 tid=0x0 nid=0x0 runnable
-     java.lang.Thread.State: RUNNABLE
+package quadratic;
 
-	at com.maddyhome.idea.copyright.options.Options.writeExternal(Options.java:142)
-	at com.maddyhome.idea.copyright.CopyrightManager.getState(CopyrightManager.java:166)
-	at com.maddyhome.idea.copyright.CopyrightManager.getState(CopyrightManager.java:54)
-	at com.intellij.configurationStore.ComponentStoreImpl.commitComponent(ComponentStoreImpl.kt:196)
-	at com.intellij.configurationStore.ComponentStoreImpl.save(ComponentStoreImpl.kt:124)
-	at com.intellij.openapi.components.impl.stores.StoreUtil.save(StoreUtil.java:49)
-	at com.intellij.openapi.project.impl.ProjectImpl.save(ProjectImpl.java:362)
-	at com.intellij.ide.SaveAndSyncHandlerImpl.doSaveDocumentsAndProjectsAndApp(SaveAndSyncHandlerImpl.java:146)
-	at com.intellij.ide.SaveAndSyncHandlerImpl.saveProjectsAndDocuments(SaveAndSyncHandlerImpl.java:134)
-	at com.intellij.ide.SaveAndSyncHandlerImpl$4.onFrameDeactivated(SaveAndSyncHandlerImpl.java:104)
-	at com.intellij.ide.FrameStateManagerImpl.fireDeactivationEvent(FrameStateManagerImpl.java:87)
-	at com.intellij.ide.FrameStateManagerImpl.access$500(FrameStateManagerImpl.java:32)
-	at com.intellij.ide.FrameStateManagerImpl$2$1.run(FrameStateManagerImpl.java:72)
-	at com.intellij.util.concurrency.QueueProcessor.runSafely(QueueProcessor.java:238)
-	at com.intellij.util.Alarm$Request$1.run(Alarm.java:352)
-	at com.intellij.openapi.application.impl.LaterInvocator$FlushQueue.runNextEvent(LaterInvocator.java:337)
-	at com.intellij.openapi.application.impl.LaterInvocator$FlushQueue.run(LaterInvocator.java:321)
-	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
-	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:756)
-	at java.awt.EventQueue.access$500(EventQueue.java:97)
-	at java.awt.EventQueue$3.run(EventQueue.java:709)
-	at java.awt.EventQueue$3.run(EventQueue.java:703)
-	at java.security.AccessController.doPrivileged(Native Method)
-	at java.security.ProtectionDomain$1.doIntersectionPrivilege(ProtectionDomain.java:75)
-	at java.awt.EventQueue.dispatchEvent(EventQueue.java:726)
-	at com.intellij.ide.IdeEventQueue.defaultDispatchEvent(IdeEventQueue.java:866)
-	at com.intellij.ide.IdeEventQueue._dispatchEvent(IdeEventQueue.java:654)
-	at com.intellij.ide.IdeEventQueue.dispatchEvent(IdeEventQueue.java:381)
-	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:201)
-	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
-	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
-	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
-	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+/**
+ * Class there is all methods for formating  quadratic equations in string.
+ */
 
-"ApplicationImpl pooled thread 76" prio=0 tid=0x0 nid=0x0 runnable
-     java.lang.Thread.State: RUNNABLE
- (in native)
-	at java.io.FileInputStream.readBytes(Native Method)
-	at java.io.FileInputStream.read(FileInputStream.java:255)
-	at sun.nio.cs.StreamDecoder.readBytes(StreamDecoder.java:284)
-	at sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:326)
-	at sun.nio.cs.StreamDecoder.read(StreamDecoder.java:178)
-	at java.io.InputStreamReader.read(InputStreamReader.java:184)
-	at java.io.Reader.read(Reader.java:140)
-	at com.intellij.util.io.BaseOutputReader.readAvailableBlocking(BaseOutputReader.java:96)
-	at com.intellij.util.io.BaseOutputReader.readAvailable(BaseOutputReader.java:137)
-	at com.intellij.util.io.BaseDataReader.doRun(BaseDataReader.java:108)
-	at com.intellij.util.io.BaseDataReader$1.run(BaseDataReader.java:45)
-	at com.intellij.openapi.application.impl.ApplicationImpl$8.run(ApplicationImpl.java:366)
-	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-	at org.jetbrains.i
+public class Format {
+	private String[] names = new String[0];
+	private String[] inNames =  new String[0];
+	private Double[] inValues = new Double[0];
+	private Double[] values = new Double[0];
+	private String error = "";
+	private int cursor = 0;
+	private char separator = '=';
+
+
+	//Public method for seting lenght and names formating
+	public void setNames(String[] names) {
+		this.setLength(names.length);
+		for(int i=0;i < names.length;i++) {
+			this.names[i] = names[i];
+		}
+	}
+
+	//private method for set length of arrays
+	private void setLength(int length) {
+		this.names = new String[length];
+		this.inNames = new String[length];
+		this.inValues = new Double[length];
+		this.values = new Double[length];
+	}
+
+	//private method for finding names in line
+	private String findNames(String line) throws IdentifyFormatException {
+		int length = line.length();
+		int strIx = this.cursor;
+		for(;strIx < length;strIx++){
+			if(!isSpace(line.charAt(strIx)))break;
+		}
+		if(strIx == length)return null;
+		int endIx = strIx;
+		for(;endIx < length;endIx++){
+			if(isSpace(line.charAt(endIx))||line.charAt(endIx) == this.separator)break;
+		}
+		for(int i=endIx;i < length;i++) {
+			if(!isSpace(line.charAt(i))) throw new IdentifyFormatException();
+			else if(line.charAt(i) == this.separator) break;
+		}
+		this.cursor = endIx;
+		return line.substring(strIx,endIx);
+	}
+
+	//private method for finding value in line
+	private Double findValue(String line) {
+		int length = line.length();
+		int strIx = this.cursor;
+		for(;strIx < length;strIx++) {
+			if(!isSpace(line.charAt(strIx)))break;
+		}
+		if(strIx == length) return null;
+		int endIx = strIx;
+		for(;endIx < length;endIx++) {
+			if(isSpace(line.charAt(endIx)))break;
+		}
+		line = line.substring(strIx,endIx);
+		try {
+			return Double.parseDouble(line);
+		}catch (NumberFormatException e){
+			this.error = "Not rigth value at position " + this.cursor;
+			return null;
+		}
+	}
+
+	//private methods for checking values , returns true or false
+	private boolean isSpace(char ch) { if(ch == ' ')return true;else return false; }
+
+	//methods for get values of private fields of class
+	public String[] getNames(){	return this.names;	}
+	public char getSeparator() { return this.separator; }
+
+	//methods for set values of private fields of class
+	public void setSeparator(char separator){ this.separator = separator; }
+}

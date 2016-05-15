@@ -6,6 +6,7 @@ import ua.in.sceinces.Program;
 import java.io.IOException;
 import java.io.SyncFailedException;
 import java.util.Arrays;
+import java.util.StringJoiner;
 
 
 /**
@@ -16,7 +17,7 @@ public class Test {
     public static void main(String[] args) throws IOException {
         //double a = readFraseForFormul("A = 1");
         //readAndParse(a,-4,4);
-        Format coefficients = new Format();
+       /* Format coefficients = new Format();
         String[] nameCoef = new String[]{"a","b","c"};
         coefficients.setNameArg(nameCoef);
         for(String s:nameCoef){System.out.println(s);}
@@ -26,9 +27,20 @@ public class Test {
         }
         for(Double values:coefficients.getInsertValues()){
             System.out.print(values + " ");
-        }
-    }
+        }*/
+        Format test = new Format();
+        String[] names = {"a","b","c"};
+        test.setNames(names);
+        System.out.print(isEqual(test.getNames(),names));
 
+    }
+    private static boolean isEqual(String[] inValue,String[] needValue){
+        if(needValue.length != inValue.length)return false;
+        for(int i=0;i<needValue.length;i++) {
+            if(!inValue[i].equals(needValue[i]))return false;
+        }
+        return true;
+    }
     private static double readFraseForFormul(String s) {
         String concate = "";
         s = s.toLowerCase();
