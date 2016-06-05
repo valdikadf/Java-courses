@@ -19,5 +19,7 @@ public class Variable {
     public String getName() { return this.name; }
     public double getValue() { return this.value; }
 
-    //Methods for 
+    //Methods for storage
+    public void storage(){}
+
 }
