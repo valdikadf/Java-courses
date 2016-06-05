@@ -1,3 +1,5 @@
+package test.pack;
+
 class VariableMap{
 	
 	Variable get(String name){
