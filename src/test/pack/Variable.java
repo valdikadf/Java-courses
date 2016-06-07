@@ -1,10 +1,8 @@
 package test.pack;
 
-class Variable{
-	
+public class Variable{
 	public double value;
 	public String name;
 	public boolean isEmpty;
-	
 }
 

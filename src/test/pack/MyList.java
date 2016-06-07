@@ -3,7 +3,7 @@ package test.pack;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
-// MyList<Variable> varList = new MyList<Variable>(varList.class)
+// MyList<Variable> varList = new MyList<Variable>(Variable.class)
 
 public class MyList<T>
 {
@@ -84,49 +84,5 @@ public class MyList<T>
         for (int i = this.stringSize - 1, end = this.stringSize - count; i >= end; i--) this.myStringList[i] = null;
         this.stringSize = this.stringSize - count;
 
-    }
-
-    public void upper()
-    {
-        for (int i = 0; i < this.stringSize; i++)
-        {
-            this.myStringList[i] = this.myStringList[i].toUpperCase();
-        }
-    }
-
-    public boolean find(T text)
-    {
-        for (int i = 0; i < this.stringSize; i++)
-        {
-            if (this.myStringList[i].equals(text))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public Double findDouble(T text)
-    {
-        try
-        {
-            for (int i = 0; i < text.length(); i++)
-            {
-                text.charAt(i);
-            }
-        }
-        catch (NumberFormatException e)
-        {
-            return null;
-        }
-        return null;
-    }
-
-    public void lower()
-    {
-        for (int i = 0; i < this.stringSize; i++)
-        {
-            this.myStringList[i] = this.myStringList[i].toLowerCase();
-        }
     }
 }

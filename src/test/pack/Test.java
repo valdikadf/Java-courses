@@ -54,7 +54,7 @@ public class Test {
     public static void task2() throws IOException {
         MyStringList list = new MyStringList();
         String temp;
-        String expression = "";
+        String expression;
         while(true){
             System.out.format("Enter some expression %s:\n",list.count()+1);
             temp = Program.stdIn.readLine();
